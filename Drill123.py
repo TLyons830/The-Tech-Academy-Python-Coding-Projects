@@ -49,41 +49,48 @@ class ParentWindow(Frame):
         for file in os.listdir(self.sfp):
             if file.endswith(".txt"):
                 SPath = os.path.join(self.sfp, file)
-                DPath = shutil.move(SPath, self.dfp)
-                conn = sqlite3.connect('Drill_123DB.db')
-                with conn:
-                    cur = conn.cursor()
-                    cur.execute("CREATE TABLE IF NOT EXISTS tbl_TextFiles123 ( \
-                        ID INTEGER PRIMARY KEY AUTOINCREMENT, \
-                        col_FileName STRING, \
-                        col_MTime)")
+                self.DPath = shutil.move(SPath, self.dfp)
+
+        conn = sqlite3.connect('Drill_123DB.db')
+        with conn:
+            cur = conn.cursor()
+            cur.execute("CREATE TABLE IF NOT EXISTS tbl_TextFiles123 ( \
+                ID INTEGER PRIMARY KEY AUTOINCREMENT, \
+                col_FileName STRING, \
+                col_MTime)")
+            conn.commit()
+        conn.close()
+        #conn = sqlite3.connect('Drill_123DB.db')
+        #with conn:
+            #cur = conn.cursor()
+            #cur.execute("DELETE FROM tbl_TextFiles123")
+            #conn.commit()
+        #conn.close()
+        
+        for item in os.listdir(self.dfp):
+            conn = sqlite3.connect('Drill_123DB.db')
+            with conn:
+                cur = conn.cursor()
+                if item.endswith('.txt'):
+                    abPath = os.path.join(self.dfp, item)
+                    time_stamp = os.path.getmtime(abPath)
+                    cur.execute("INSERT INTO tbl_TextFiles123(col_FileName, col_Mtime) VALUES (?, ?)", (item, time_stamp,))
                     conn.commit()
-                conn.close()
-                #conn = sqlite3.connect('Drill_123DB.db')
-                #with conn:
-                 #   cur = conn.cursor()
-                  #  cur.execute("DELETE FROM tbl_TextFiles123")
-                   # conn.commit()
-                #conn.close()
-                conn = sqlite3.connect('Drill_123DB.db')
-                with conn:
-                    cur = conn.cursor()
-                    for item in os.listdir(self.dfp):
-                        if item.endswith('.txt'):
-                            abPath = os.path.join(self.dfp, item)
-                            time_stamp = os.path.getmtime(abPath)
-                            cur.execute("INSERT INTO tbl_TextFiles123(col_FileName, col_Mtime) VALUES (?, ?)", (item, time_stamp,))
-                        conn.commit()
-                conn.close()
-                conn = sqlite3.connect('Drill_123DB.db')
-                with conn:
-                    cur = conn.cursor()
-                    cur.execute("SELECT * FROM tbl_TextFiles123")
-                    printStuff = cur.fetchall()
-                    print(printStuff)
-                conn.close()
-                
-                
+        conn.close()
+ 
+        conn = sqlite3.connect('Drill_123DB.db')
+        with conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM tbl_TextFiles123")
+            printStuff = cur.fetchall()
+            print(printStuff)
+        conn.close()
+            
+
+
+
+
+
 
 
 
