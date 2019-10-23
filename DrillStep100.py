@@ -1,6 +1,6 @@
 import os
 
-fPath = 'C:\\DrillStep100Dir\\'
+fPath = 'C:\\Users\\Tyler\\Desktop\\The-Tech-Academy-Python-Coding-Projects\\SourceDir'
 
 for file in os.listdir(fPath):
     if file.endswith(".txt"):
