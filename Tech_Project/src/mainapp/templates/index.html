@@ -5,18 +5,20 @@
     <h3>Welcome to BlueBird Banking</h3>
     <hr>
     <div class="text-center">
-        <h5>Manage your existing account!</h5>
+        <form name="AccountInfo" method="POST" action="">
+            <h5>Manage your existing account!</h5>
         <!-- Need to replace the <input> with a Django generated DropDown form -->
-        {% csrf_token %}
-        <label>Choose Account:</label>
-        <select onChange="top.location.href=this.options[this.selectedIndex].value;">
-            {% for account in Accounts %}
+            {% csrf_token %}
+            <label>Choose Account:</label>
+            <select onChange="top.location.href=this.options[this.selectedIndex].value;">
+            {% for account in checkbook %}
                 <option value="../{{ account.pk }}/CreateNewAccount/">{{ Accounts.account }}</option>
             {% endfor %}
             </select>
 
         <!-- Need to add a method to the onclick so the button works-->
-        <button type="button" onclick="">Go to Account</button>
+            <button type="button" onclick="">Go to Account</button>
+        </form>
     </div>
     <hr>
     <div class="text-center">

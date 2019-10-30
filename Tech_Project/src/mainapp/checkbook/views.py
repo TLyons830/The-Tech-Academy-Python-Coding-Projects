@@ -16,7 +16,7 @@ def CreateNewAccount(request):
     form = AccountInfo(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect('admin_console')
+        return redirect('index')
     else:
         print(form.errors)
         form = AccountInfo()
