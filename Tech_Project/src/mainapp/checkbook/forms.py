@@ -1,6 +1,6 @@
 from django.forms import ModelForm
-from .models import Information
-from .models import Accounts
+from checkbook.models import Information
+from checkbook.models import Accounts
 
 
 class AccountInfo(ModelForm):

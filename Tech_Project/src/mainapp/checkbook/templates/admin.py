@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Accounts
-from .models import Information
+from checkbook.models import Accounts
+from checkbook.models import Information
 
 
 admin.site.register(Accounts)

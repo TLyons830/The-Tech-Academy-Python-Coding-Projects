@@ -1,7 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from .templates.forms import AccountInfo
-from .templates.models import Information
+from django.shortcuts import render, redirect
+from checkbook.forms import AccountInfo
 
 
 def index(request):
